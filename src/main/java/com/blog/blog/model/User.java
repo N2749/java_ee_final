@@ -2,7 +2,10 @@ package com.blog.blog.model;
 
 import jakarta.persistence.*;
 
-@Entity
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity(name = "User")
 @Table(name = "users")
 public class User {
     @Id
@@ -18,6 +21,12 @@ public class User {
     private boolean isAdmin;
     @Column
     private boolean isStaff;
+    @OneToMany(
+            mappedBy = "creator",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Post> posts = new ArrayList<>();
 
     public User(String username, String login, String password) {
         this.username = username;
@@ -82,6 +91,16 @@ public class User {
 
     public Long getId() {
         return id;
+    }
+
+    public void addPost(Post post) {
+        this.posts.add(post);
+        post.setCreator(this);
+    }
+
+    public void deletePost(Post post) {
+        this.posts.remove(post);
+        post.setCreator(null);
     }
 
     @Override

@@ -10,5 +10,5 @@ public interface UserRepository {
 	public User getUserByLogin(String login);
 	public void addUser(User user);
 	public boolean deleteUser(int id);
-	public boolean editUser(User user);
+	public void editUser(User user);
 }

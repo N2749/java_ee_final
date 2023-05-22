@@ -1,4 +1,4 @@
-package com.blog.blog.controller;
+package com.blog.blog.wrapper;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -9,15 +9,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-/*
-* Only used to hide filepath in url
-* */
 
-@WebServlet(name = "register", value = "/register")
-public class Register extends HttpServlet {
+@WebServlet(name = "post", value = "/post")
+public class Post extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/pages/user/register.jsp");
-        dispatcher.forward(req, resp);
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/pages/posts/post.jsp");
+        requestDispatcher.forward(req, resp);
     }
 }

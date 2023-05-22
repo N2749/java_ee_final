@@ -40,18 +40,21 @@ public class UserRepositoryHibernate implements UserRepository {
     @Override
     public void addUser(User user) {
         transaction = session.beginTransaction();
-        System.out.println(user.toString());
         session.save(user);
         transaction.commit();
     }
 
     @Override
     public boolean deleteUser(int id) {
+//        TODO: continue here
         return false;
     }
 
     @Override
-    public boolean editUser(User student) {
-        return false;
+    public void editUser(User user) {
+//        TODO: figure out the way to know if edit was successful or not
+        transaction = session.beginTransaction();
+        session.update(user);
+        transaction.commit();
     }
 }

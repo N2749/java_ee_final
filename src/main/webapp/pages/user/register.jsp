@@ -45,6 +45,7 @@
 
 </head>
 <body>
+<jsp:include page="../../components/header.jsp"></jsp:include>
 <form id="form" action="/users" method="post">
     <input type="text" hidden="hidden" id="action" name="action" value="createUser"/>
     <label for="username">username</label> <br>

@@ -1,5 +1,6 @@
 package com.blog.blog.repository.database;
 
+import com.blog.blog.model.Post;
 import com.blog.blog.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,6 +16,7 @@ public class HibernateConnection {
 		Configuration configuration = new Configuration();
 		configuration.configure("hibernate.cfg.xml");
 		configuration.addAnnotatedClass(User.class);
+		configuration.addAnnotatedClass(Post.class);
 		
 		SessionFactory sessionFactory = configuration.buildSessionFactory();
 		session = sessionFactory.openSession();
