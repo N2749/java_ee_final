@@ -113,13 +113,14 @@ public class UserService extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
-        Cookie loginCookie = new Cookie("user", login);
         Cookie usernameCookie = new Cookie("username", user.getUsername());
         Cookie idCookie = new Cookie("userId", "" + user.getId());
         Cookie isAdminCookie = new Cookie("isAdmin", "" + user.isAdmin());
         Cookie isStaffCookie = new Cookie("isStaff", "" + user.isStaff());
-        loginCookie.setMaxAge(30 * 60);
-        resp.addCookie(loginCookie);
+        usernameCookie.setMaxAge(30 * 60);
+        isAdminCookie.setMaxAge(30 * 60);
+        isStaffCookie.setMaxAge(30 * 60);
+        idCookie.setMaxAge(30 * 60);
         resp.addCookie(usernameCookie);
         resp.addCookie(idCookie);
         resp.addCookie(isAdminCookie);
