@@ -1,5 +1,6 @@
 package com.blog.blog.service;
 
+import com.blog.blog.model.Post;
 import com.blog.blog.model.User;
 import com.blog.blog.repository.implementation.hibernate.UserRepositoryHibernate;
 import com.blog.blog.repository.interfaces.UserRepository;
@@ -128,17 +129,38 @@ public class UserService extends HttpServlet {
         resp.sendRedirect("/");
     }
 
-    public static void logOut(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Cookie[] cookies = request.getCookies();
+    public static void logOut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        Cookie[] cookies = req.getCookies();
 
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("user") || cookie.getName().equals("username") || cookie.getName().equals("userId") || cookie.getName().equals("isAdmin") || cookie.getName().equals("isStaff")) {
                 cookie.getValue();
                 cookie.setMaxAge(0);
-                response.addCookie(cookie);
-                continue;
+                resp.addCookie(cookie);
             }
         }
-        response.sendRedirect("/blog");
+        PrintWriter out = resp.getWriter();
+
+        out.println("<html><body>");
+        out.println("<h1>Farewell, wanderer</h1>");
+        out.println("<a href=\"/posts\">return to shelter</a>");
+        out.println("</body></html>");
+        out.close();
+    }
+
+    private void disableUser(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int id = getUserId(req);
+        User user = repository.get(id);
+        user.setActive(false);
+        repository.update(user);
+
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+
+        out.println("<html><body>");
+        out.println("<h1>All of us will perish eventually, sooner or later (if necessary, contact the admin, they'll bring you back)</h1>");
+        out.println("<a href=\"/index.jsp\">Go to home page</a>");
+        out.println("</body></html>");
+        out.close();
     }
 }
