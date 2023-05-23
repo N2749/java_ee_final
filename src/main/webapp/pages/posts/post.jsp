@@ -18,7 +18,7 @@
 <%--TODO: edit--%>
 <%
     PostRepository postRepository = new PostRepositoryHibernate();
-    Post post = postRepository.getPost(Integer.parseInt(request.getParameter("id")));
+    Post post = postRepository.get(Integer.parseInt(request.getParameter("id")));
 %>
 <%
     Cookie[] cookies = request.getCookies();
