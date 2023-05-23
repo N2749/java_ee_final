@@ -1,6 +1,5 @@
 <%@ page import="com.blog.blog.model.Post" %>
 <%@ page import="com.blog.blog.repository.interfaces.PostRepository" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="com.blog.blog.repository.implementation.hibernate.PostRepositoryHibernate" %><%--
   Created by IntelliJ IDEA.
   User: nurba
@@ -15,20 +14,24 @@
 </head>
 <body>
 <jsp:include page="../../components/header.jsp"></jsp:include>
-<%--TODO: edit--%>
 <%
     PostRepository postRepository = new PostRepositoryHibernate();
     Post post = postRepository.get(Integer.parseInt(request.getParameter("id")));
-%>
-<%
+
     Cookie[] cookies = request.getCookies();
-    boolean isStaff = false;
+    int userId = -1;
     for (Cookie cookie : cookies) {
-        if (cookie.getName().equals("isStaff")) {
-            isStaff = Boolean.parseBoolean(cookie.getValue());
+        if (cookie.getName().equals("userId")) {
+            userId = Integer.parseInt(cookie.getValue());
         }
     }
+    if (userId != -1 && post.getCreator().getId() == userId) {
 %>
+<a href="/postEdit?post=<%=post.getId()%>">edit</a>
+<%
+    }
+%>
+
 <p><%=post.getTitle()%>
 </p>
 <p>created by: <%=post.getCreator().getUsername()%>
