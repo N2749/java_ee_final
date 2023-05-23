@@ -56,7 +56,7 @@ public class UserService extends HttpServlet {
     private void deleteUser(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         int id = getUserId(req);
         if (id == -1) return;
-        repository.deleteUser(id);
+        repository.delete(id);
         logOut(req, resp);
     }
 
@@ -70,7 +70,7 @@ public class UserService extends HttpServlet {
         String password = req.getParameter("password");
 
         User user = new User(username, login, password);
-        repository.addUser(user);
+        repository.add(user);
 
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
