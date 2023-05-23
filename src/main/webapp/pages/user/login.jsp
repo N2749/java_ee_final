@@ -19,6 +19,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+        }
+
+        article {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
         }
 
         form {
@@ -31,36 +39,28 @@
             margin: 1rem auto;
             padding: 0.2rem;
         }
-
-        .error {
-            display: block;
-            font-size: 0.7rem;
-            color: red;
-        }
-
-        .notVisible {
-            display: none
-        }
     </style>
 </head>
 <body>
 <jsp:include page="../../components/header.jsp"></jsp:include>
-<form id="form" action="/users" method="post">
-    <input type="text" hidden="hidden" id="action" name="action" value="logIn"/>
-    <label for="login">login</label> <br>
-    <input id="login" type="text" name="login" placeholder="student_login"> <br>
+<article>
+    <form id="form" action="/users" method="post">
+        <input type="text" hidden="hidden" id="action" name="action" value="logIn"/>
+        <label for="login">login</label> <br>
+        <input id="login" type="text" name="login" placeholder="cool_username334"> <br>
 
-    <label for="password">password</label><br>
-    <input id="password" type="password" name="password" placeholder="********">
-    <br>
-    <label for="check">show password</label>
-    <input type="checkbox" name="see" onclick="showPassword()" id="check"><br>
-    <button type="submit" class="submit">login</button>
-    <p>
-        Don't have an account? <br> <a href="/register">Register</a>
-    </p>
-</form>
+        <label for="password">password</label><br>
+        <input id="password" type="password" name="password" placeholder="********">
+        <br>
+        <label for="check">show password</label>
+        <input type="checkbox" name="see" onclick="showPassword()" id="check"><br>
+        <button type="submit" class="submit">login</button>
+        <p>
+            Don't have an account? <br> <a href="/register">Register</a>
+        </p>
+    </form>
 
+</article>
 <script>
     function showPassword() {
         input = document.getElementById("password");

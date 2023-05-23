@@ -19,6 +19,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+        }
+
+        article {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
         }
 
         form {
@@ -31,40 +39,33 @@
             margin: 1rem auto;
             padding: 0.2rem;
         }
-
-        .error {
-            display: block;
-            font-size: 0.7rem;
-            color: red;
-        }
-
-        .notVisible {
-            display: none
-        }
     </style>
 
 </head>
 <body>
 <jsp:include page="../../components/header.jsp"></jsp:include>
-<form id="form" action="/users" method="post">
-    <input type="text" hidden="hidden" id="action" name="action" value="createUser"/>
-    <label for="username">username</label> <br>
-    <input type="text" id="username" name="username" placeholder="cool_dude" required="required"> <br>
+<article>
 
-    <label for="login">login</label> <br>
-    <input id="login" type="text" name="login" placeholder="cool.dude@awesome.com" required="required"> <br>
+    <form id="form" action="/users" method="post">
+        <input type="text" hidden="hidden" id="action" name="action" value="createUser"/>
+        <label for="username">username</label> <br>
+        <input type="text" id="username" name="username" placeholder="cool_dude" required="required"> <br>
 
-    <label for="password">password</label> <br>
-    <input type="password" name="password" placeholder="********" id="password" required="required"> <br>
+        <label for="login">login</label> <br>
+        <input id="login" type="text" name="login" placeholder="cool.dude@awesome.com" required="required"> <br>
 
-    <label for="see">show</label>
-    <input id="see" type="checkbox" name="see" onclick="showPassword()" id="check"><br>
+        <label for="password">password</label> <br>
+        <input type="password" name="password" placeholder="********" id="password" required="required"> <br>
 
-    <button type="submit" class="submit" onclick="validateLogin()">register</button>
-    <p>
-        Already have an account? <br> <a href="/login">Login</a>
-    </p>
-</form>
+        <label for="see">show</label>
+        <input id="see" type="checkbox" name="see" onclick="showPassword()" id="check"><br>
+
+        <button type="submit" class="submit" onclick="validateLogin()">register</button>
+        <p>
+            Already have an account? <br> <a href="/login">Login</a>
+        </p>
+    </form>
+</article>
 <script>
     function showPassword() {
         let input = document.getElementById("password");
