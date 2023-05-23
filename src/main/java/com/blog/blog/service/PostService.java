@@ -49,11 +49,39 @@ public class PostService extends HttpServlet {
     }
 
     private void deletePost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        //TODO: continue here.............
+        String postId = req.getParameter("postId");
+
+        Post post = repository.get(Integer.parseInt(postId));
+        repository.delete(post);
+
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+
+        out.println("<html><body>");
+        out.println("<h1>All of us will perish eventually, sooner or later (if necessary, contact the admin, they'll bring you back)</h1>");
+        out.println("<a href=\"/index.jsp\">Go to home page</a>");
+        out.println("</body></html>");
+        out.close();
     }
 
-    private void updatePost(HttpServletRequest req, HttpServletResponse resp) {
+    private void updatePost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String title = req.getParameter("title");
+        String text = req.getParameter("text");
+        String postId = req.getParameter("postId");
 
+        Post post = repository.get(Integer.parseInt(postId));
+        post.setTitle(title);
+        post.setText(text);
+        repository.update(post);
+
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+
+        out.println("<html><body>");
+        out.println("<h1>All of us commit mistakes. Don't blame yourself, it just happens</h1>");
+        out.println("<a href=\"/index.jsp\">Go to home page</a>");
+        out.println("</body></html>");
+        out.close();
     }
 
     private void createPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
