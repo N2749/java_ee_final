@@ -21,6 +21,8 @@ public class User {
     private boolean isAdmin;
     @Column
     private boolean isStaff;
+    @Column
+    private boolean isActive;
     @OneToMany(
             mappedBy = "creator",
             cascade = CascadeType.ALL,
@@ -34,6 +36,7 @@ public class User {
         this.password = password;
         this.isAdmin = false;
         this.isStaff = false;
+        this.isActive = true;
     }
 
     public User() {
@@ -42,7 +45,7 @@ public class User {
         this.password = "";
         this.isAdmin = false;
         this.isStaff = false;
-
+        this.isActive = true;
     }
 
     public boolean isAdmin() {
@@ -101,6 +104,22 @@ public class User {
     public void deletePost(Post post) {
         this.posts.remove(post);
         post.setCreator(null);
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
     @Override
