@@ -9,30 +9,41 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+    </style>
 </head>
 <body>
-<a href="/posts">posts</a>
-<%
-    Cookie[] cookies = request.getCookies();
-    int userId = -1;
+<nav>
 
-    for (Cookie cookie : cookies) {
-        if (cookie.getName().equals("userId")) {
-            userId = Integer.parseInt(cookie.getValue());
+    <a href="/posts">posts</a>
+    <%
+        Cookie[] cookies = request.getCookies();
+        int userId = -1;
+
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("userId")) {
+                userId = Integer.parseInt(cookie.getValue());
+            }
         }
-    }
-    if (userId != -1) {
-%>
-<%--TODO: profile page--%>
-<a href="">profile</a>
-<%
-} else {
-%>
-<a href="login">login</a>
-<a href="">logout</a>
-<%
-    }
-%>
-<hr>
+        if (userId != -1) {
+    %>
+    <%--TODO: profile page--%>
+    <a href="/profile">profile</a>
+    <a href="/logOut">logout</a>
+    <%
+    } else {
+    %>
+    <a href="login">login</a>
+    <%
+        }
+    %>
+</nav>
+<br>
 </body>
 </html>
