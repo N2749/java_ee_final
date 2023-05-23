@@ -15,7 +15,7 @@ public class UserRepositoryHibernate implements UserRepository {
     Session session = HibernateConnection.getSession();
 
     @Override
-    public ArrayList<User> getUsers() {
+    public ArrayList<User> getAll() {
         String query = "from " + User.class.getSimpleName();
         System.out.println(query);
         ArrayList<User> users = (ArrayList<User>) session.createQuery(query).list();
@@ -23,7 +23,7 @@ public class UserRepositoryHibernate implements UserRepository {
     }
 
     @Override
-    public User getUser(int id) {
+    public User get(int id) {
         User user = session.get(User.class, Integer.valueOf(id));
         return user;
     }
@@ -34,20 +34,20 @@ public class UserRepositoryHibernate implements UserRepository {
     }
 
     @Override
-    public void addUser(User user) {
+    public void add(User user) {
         transaction = session.beginTransaction();
         session.save(user);
         transaction.commit();
     }
 
     @Override
-    public boolean deleteUser(int id) {
+    public boolean delete(int id) {
 //        TODO: continue here
         return false;
     }
 
     @Override
-    public void editUser(User user) {
+    public void update(User user) {
 //        TODO: figure out the way to know if edit was successful or not
         transaction = session.beginTransaction();
         session.update(user);

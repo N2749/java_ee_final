@@ -20,8 +20,20 @@
     PostRepository postRepository = new PostRepositoryHibernate();
     Post post = postRepository.getPost(Integer.parseInt(request.getParameter("id")));
 %>
-<p><%=post.getTitle()%></p>
-<p>created by: <%=post.getCreator().getUsername()%></p>
-<p><%=post.getText()%></p>
+<%
+    Cookie[] cookies = request.getCookies();
+    boolean isStaff = false;
+    for (Cookie cookie : cookies) {
+        if (cookie.getName().equals("isStaff")) {
+            isStaff = Boolean.parseBoolean(cookie.getValue());
+        }
+    }
+%>
+<p><%=post.getTitle()%>
+</p>
+<p>created by: <%=post.getCreator().getUsername()%>
+</p>
+<p><%=post.getText()%>
+</p>
 </body>
 </html>

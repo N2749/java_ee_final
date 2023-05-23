@@ -26,7 +26,7 @@ public class PostRepositoryHibernate implements PostRepository {
     }
 
     @Override
-    public Post getPost(int id) {
+    public Post get(int id) {
         transaction = session.beginTransaction();
         Post post = session.get(Post.class, Integer.valueOf(id));
         transaction.commit();
@@ -34,24 +34,24 @@ public class PostRepositoryHibernate implements PostRepository {
     }
 
     @Override
-    public Post getPostsByUser(User user) {
+    public Post getByUser(User user) {
         return null;
     }
 
     @Override
-    public void addPost(Post post) {
+    public void add(Post post) {
         transaction = session.beginTransaction();
         session.save(post);
         transaction.commit();
     }
 
     @Override
-    public boolean deletePost(Post post) {
+    public boolean delete(Post post) {
         return false;
     }
 
     @Override
-    public void editPost(Post post) {
+    public void update(Post post) {
 
     }
 }

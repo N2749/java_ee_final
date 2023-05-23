@@ -1,7 +1,6 @@
 package com.blog.blog.service;
 
 import com.blog.blog.model.Post;
-import com.blog.blog.model.User;
 import com.blog.blog.repository.implementation.hibernate.PostRepositoryHibernate;
 import com.blog.blog.repository.implementation.hibernate.UserRepositoryHibernate;
 import com.blog.blog.repository.interfaces.PostRepository;
@@ -63,8 +62,8 @@ public class PostService extends HttpServlet {
         int creator_id = getUserId(req);
 
         UserRepository userRepository = new UserRepositoryHibernate();
-        Post post = new Post(userRepository.getUser(creator_id), title, text);
-        repository.addPost(post);
+        Post post = new Post(userRepository.get(creator_id), title, text);
+        repository.add(post);
 
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();

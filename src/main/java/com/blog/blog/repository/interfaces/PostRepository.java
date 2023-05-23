@@ -8,13 +8,13 @@ import com.blog.blog.model.User;
 public interface PostRepository {
     public ArrayList<Post> getAll();
 
-    public Post getPost(int id);
+    public Post get(int id);
 
-    public Post getPostsByUser(User user);
+    public Post getByUser(User user);
 
-    public void addPost(Post post);
+    public void add(Post post);
 
-    public boolean deletePost(Post post);
+    public boolean delete(Post post);
 
-    public void editPost(Post post);
+    public void update(Post post);
 }
