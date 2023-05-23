@@ -1,5 +1,6 @@
 package com.blog.blog.repository.implementation.hibernate;
 
+import com.blog.blog.model.Post;
 import com.blog.blog.model.User;
 import com.blog.blog.repository.database.HibernateConnection;
 import com.blog.blog.repository.interfaces.UserRepository;
@@ -24,7 +25,7 @@ public class UserRepositoryHibernate implements UserRepository {
 
     @Override
     public User get(int id) {
-        User user = session.get(User.class, Integer.valueOf(id));
+        User user = session.get(User.class, id);
         return user;
     }
 
