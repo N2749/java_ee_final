@@ -16,19 +16,15 @@ public class UserRepositoryHibernate implements UserRepository {
 
     @Override
     public ArrayList<User> getUsers() {
-        transaction = session.beginTransaction();
         String query = "from " + User.class.getSimpleName();
         System.out.println(query);
         ArrayList<User> users = (ArrayList<User>) session.createQuery(query).list();
-        transaction.commit();
         return users;
     }
 
     @Override
     public User getUser(int id) {
-        transaction = session.beginTransaction();
         User user = session.get(User.class, Integer.valueOf(id));
-        transaction.commit();
         return user;
     }
 
