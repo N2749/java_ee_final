@@ -26,7 +26,7 @@
     }
 %>
 <% if (isStaff) { %>
-<button><a href="add_post.jsp">create new post</a></button>
+<button><a href="addPost">create new post</a></button>
 <%}%>
 <%
     PostRepository postRepository = new PostRepositoryHibernate();

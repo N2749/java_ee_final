@@ -59,7 +59,7 @@ public class PostService extends HttpServlet {
 
         out.println("<html><body>");
         out.println("<h1>All of us will perish eventually, sooner or later (if necessary, contact the admin, they'll bring you back)</h1>");
-        out.println("<a href=\"/index.jsp\">Go to home page</a>");
+        out.println("<a href=\"/blog_war_exploded\">Go to home page</a>");
         out.println("</body></html>");
         out.close();
     }
@@ -79,7 +79,7 @@ public class PostService extends HttpServlet {
 
         out.println("<html><body>");
         out.println("<h1>All of us commit mistakes. Don't blame yourself, it just happens</h1>");
-        out.println("<a href=\"/index.jsp\">Go to home page</a>");
+        out.println("<a href=\"/blog_war_exploded\">Go to home page</a>");
         out.println("</body></html>");
         out.close();
     }
@@ -98,7 +98,7 @@ public class PostService extends HttpServlet {
 
         out.println("<html><body>");
         out.println("<h1>You've created something beautiful, excellent, worthy. Congrats!</h1>");
-        out.println("<a href=\"/index.jsp\">Go to home page</a>");
+        out.println("<a href=\"/blog_war_exploded\">Go to home page</a>");
         out.println("</body></html>");
         out.close();
     }
