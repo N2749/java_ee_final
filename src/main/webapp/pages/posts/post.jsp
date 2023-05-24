@@ -27,7 +27,14 @@
     }
     if (userId != -1 && post.getCreator().getId() == userId) {
 %>
-<a href="postEdit?post=<%=post.getId()%>">edit</a>
+<p>
+    <a href="postEdit?post=<%=post.getId()%>">edit</a>
+</p>
+<form action="postService" method="post">
+    <input type="text" hidden="hidden" id="action" name="action" value="deletePost"/>
+    <input type="text" hidden="hidden" id="postId" name="postId" value="<%=post.getId()%>"/>
+    <button type="submit" class="submit">delete</button>
+</form>
 <%
     }
 %>

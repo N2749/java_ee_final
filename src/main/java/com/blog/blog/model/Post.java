@@ -2,6 +2,8 @@ package com.blog.blog.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity(name = "Post")
 @Table(name = "posts")
 public class Post {
@@ -14,6 +16,10 @@ public class Post {
     private String title;
     @Column
     String text;
+
+    @ManyToMany
+    @JoinTable(name="posts")
+    List<Tag> tags;
 
     public Post(User creator, String title, String text) {
         this.creator = creator;

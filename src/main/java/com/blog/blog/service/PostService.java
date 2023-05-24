@@ -58,7 +58,7 @@ public class PostService extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         out.println("<html><body>");
-        out.println("<h1>All of us will perish eventually, sooner or later (if necessary, contact the admin, they'll bring you back)</h1>");
+        out.println("<h1>All the things we care about will perish eventually, sooner or later</h1>");
         out.println("<a href=\"/blog_war_exploded\">Go to home page</a>");
         out.println("</body></html>");
         out.close();
@@ -97,7 +97,7 @@ public class PostService extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         out.println("<html><body>");
-        out.println("<h1>You've created something beautiful, excellent, worthy. Congrats!</h1>");
+        out.println("<h1>You've created something worthy. Congrats!</h1>");
         out.println("<a href=\"/blog_war_exploded\">Go to home page</a>");
         out.println("</body></html>");
         out.close();
