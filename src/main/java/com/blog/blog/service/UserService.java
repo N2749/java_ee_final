@@ -1,5 +1,6 @@
 package com.blog.blog.service;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.blog.blog.model.Post;
 import com.blog.blog.model.User;
 import com.blog.blog.repository.implementation.hibernate.UserRepositoryHibernate;
@@ -16,7 +17,7 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "users", value = "/users")
 public class UserService extends HttpServlet {
-
+    String bcryptHashString;
     UserRepository repository = new UserRepositoryHibernate();
 
     @Override
@@ -69,13 +70,12 @@ public class UserService extends HttpServlet {
         String username = req.getParameter("username");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-
-        User user = new User(username, login, password);
+        bcryptHashString = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+        User user = new User(username, login, bcryptHashString);
         repository.add(user);
 
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
-
         out.println("<html><body>");
         out.println("<h1>Welcome to the club, Buddy!</h1>");
         out.println("<a href=\"/login\">Go to login page</a>");
@@ -107,10 +107,10 @@ public class UserService extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
-
         UserRepository repository = new UserRepositoryHibernate();
         User user = repository.getUserByLogin(login);
-        if (user == null || !user.getPassword().equals(password)) {
+        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
+        if (user == null || !result.verified) {
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
