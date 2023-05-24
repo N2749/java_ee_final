@@ -33,6 +33,17 @@
 %>
 <h3>Profile of <%=user.getUsername()%>, the <%=request.getAttribute("postfix")%>
 </h3>
+<%
+    if (user.getId() == currentUserId) {
+%>
+<p><a href="userEdit">edit</a></p>
+<form action="users" method="post">
+    <input type="text" hidden="hidden" id="action" name="action" value="deleteUser"/>
+    <button type="submit" class="submit">delete</button>
+</form>
+<%
+    }
+%>
 <h3>Posts</h3>
 <% for (Post p :
         user.getPosts()) {

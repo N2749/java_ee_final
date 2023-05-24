@@ -56,7 +56,7 @@
         <input type="checkbox" name="see" onclick="showPassword()" id="check"><br>
         <button type="submit" class="submit">login</button>
         <p>
-            Don't have an account? <br> <a href="/register">Register</a>
+            Don't have an account? <br> <a href="register">Register</a>
         </p>
     </form>
 

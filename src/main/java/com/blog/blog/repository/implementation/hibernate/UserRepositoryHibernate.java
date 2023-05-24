@@ -42,6 +42,9 @@ public class UserRepositoryHibernate implements UserRepository {
     @Override
     public boolean delete(int id) {
 //        TODO: continue here
+        transaction = session.beginTransaction();
+        session.delete(get(id));
+        transaction.commit();
         return false;
     }
 

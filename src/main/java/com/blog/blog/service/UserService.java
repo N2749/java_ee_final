@@ -62,8 +62,27 @@ public class UserService extends HttpServlet {
         logOut(req, resp);
     }
 
-    private void updateUser(HttpServletRequest req, HttpServletResponse resp) {
+    private void updateUser(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String username = req.getParameter("username");
+        String login = req.getParameter("login");
+        String password = req.getParameter("password");
+        String userId = req.getParameter("userId");
+        bcryptHashString = BCrypt.withDefaults().hashToString(12, password.toCharArray());
 
+        User user = repository.get(Integer.parseInt(userId));
+        user.setLogin(login);
+        user.setUsername(username);
+        user.setPassword(bcryptHashString);
+
+        repository.update(user);
+
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
+        out.println("<html><body>");
+        out.println("<h1>Some of us do not like how they are, but remember to accept yourself as you are</h1>");
+        out.println("<a href=\"/blog_war_exploded\">go home</a>");
+        out.println("</body></html>");
+        out.close();
     }
 
     private void createUser(HttpServletRequest req, HttpServletResponse resp) throws IOException {
