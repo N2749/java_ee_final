@@ -1,6 +1,9 @@
 <%@ page import="com.blog.blog.model.Post" %>
 <%@ page import="com.blog.blog.repository.interfaces.PostRepository" %>
-<%@ page import="com.blog.blog.repository.implementation.hibernate.PostRepositoryHibernate" %><%--
+<%@ page import="com.blog.blog.repository.implementation.hibernate.PostRepositoryHibernate" %>
+<%@ page import="com.blog.blog.repository.interfaces.TagRepository" %>
+<%@ page import="com.blog.blog.repository.implementation.hibernate.TagRepositoryHibernate" %>
+<%@ page import="com.blog.blog.model.Tag" %><%--
   Created by IntelliJ IDEA.
   User: nurba
   Date: 17.05.2023
@@ -42,6 +45,15 @@
 <p><%=post.getTitle()%>
 </p>
 <p>created by: <%=post.getCreator().getUsername()%>
+</p>
+<p>Tags:
+<%
+    for (Tag t : post.getTags()) {
+%>
+    <span><%=t.getName()%>, </span>
+<%
+    }
+%>
 </p>
 <p><%=post.getText()%>
 </p>

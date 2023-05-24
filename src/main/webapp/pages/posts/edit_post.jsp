@@ -1,6 +1,9 @@
 <%@ page import="com.blog.blog.model.Post" %>
 <%@ page import="com.blog.blog.repository.interfaces.PostRepository" %>
-<%@ page import="com.blog.blog.repository.implementation.hibernate.PostRepositoryHibernate" %><%--
+<%@ page import="com.blog.blog.repository.implementation.hibernate.PostRepositoryHibernate" %>
+<%@ page import="com.blog.blog.repository.interfaces.TagRepository" %>
+<%@ page import="com.blog.blog.repository.implementation.hibernate.TagRepositoryHibernate" %>
+<%@ page import="com.blog.blog.model.Tag" %><%--
   Created by IntelliJ IDEA.
   User: nurba
   Date: 17.05.2023
@@ -33,6 +36,19 @@
 <form action="postService" method="post">
     <input type="text" hidden="hidden" id="action" name="action" value="updatePost"/>
     <input type="text" hidden="hidden" id="postId" name="postId" value="<%=post.getId()%>"/>
+    <span>tags
+    <%
+        TagRepository tagRepository = new TagRepositoryHibernate();
+        for (Tag t : tagRepository.getAll()) {
+    %>
+    <label>
+        <input type="checkbox" name="tags" value="<%=t.getId()%>"><%=t.getName()%>
+    </label>
+    <%
+        }
+    %>
+    </span>
+    <br>
     <label for="title">title</label> <br>
     <input type="text" id="title" name="title" placeholder="sunny day" required="required" value="<%=post.getTitle()%>">
     <br>

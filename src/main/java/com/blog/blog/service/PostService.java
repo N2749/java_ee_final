@@ -1,9 +1,12 @@
 package com.blog.blog.service;
 
 import com.blog.blog.model.Post;
+import com.blog.blog.model.Tag;
 import com.blog.blog.repository.implementation.hibernate.PostRepositoryHibernate;
+import com.blog.blog.repository.implementation.hibernate.TagRepositoryHibernate;
 import com.blog.blog.repository.implementation.hibernate.UserRepositoryHibernate;
 import com.blog.blog.repository.interfaces.PostRepository;
+import com.blog.blog.repository.interfaces.TagRepository;
 import com.blog.blog.repository.interfaces.UserRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,6 +17,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @WebServlet(name = "postService", value = "/postService")
 public class PostService extends HttpServlet {
@@ -65,13 +71,23 @@ public class PostService extends HttpServlet {
     }
 
     private void updatePost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("hererrrrr");
         String title = req.getParameter("title");
         String text = req.getParameter("text");
         String postId = req.getParameter("postId");
+        String[] tagsIds = req.getParameterValues("tags");
+        Arrays.stream(tagsIds).forEach(System.out::println);
+        List<Tag> tags = new ArrayList<>();
+        TagRepository tagRepository = new TagRepositoryHibernate();
+        for (String s : tagsIds) {
+            tags.add(tagRepository.get(Integer.parseInt(s)));
+        }
+        tags.stream().forEach(System.out::println);
 
         Post post = repository.get(Integer.parseInt(postId));
         post.setTitle(title);
         post.setText(text);
+        post.setTags(tags);
         repository.update(post);
 
         resp.setContentType("text/html");
@@ -87,10 +103,21 @@ public class PostService extends HttpServlet {
     private void createPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String title = req.getParameter("title");
         String text = req.getParameter("text");
+        String[] tagsIds = req.getParameterValues("tags");
+
         int creator_id = getUserId(req);
 
         UserRepository userRepository = new UserRepositoryHibernate();
-        Post post = new Post(userRepository.get(creator_id), title, text);
+
+        List<Tag> tags = new ArrayList<>();
+        TagRepository tagRepository = new TagRepositoryHibernate();
+
+        for (String s : tagsIds) {
+            tagRepository.get(Integer.parseInt(s));
+        }
+
+        Post post = new Post(userRepository.get(creator_id), title, text, tags);
+
         repository.add(post);
 
         resp.setContentType("text/html");

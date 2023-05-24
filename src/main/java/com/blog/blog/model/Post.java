@@ -18,8 +18,23 @@ public class Post {
     String text;
 
     @ManyToMany
-    @JoinTable(name="posts")
+    @JoinTable
     List<Tag> tags;
+
+    public Post(User creator, String title, String text, List<Tag> tags) {
+        this.creator = creator;
+        this.title = title;
+        this.text = text;
+        this.tags = tags;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 
     public Post(User creator, String title, String text) {
         this.creator = creator;

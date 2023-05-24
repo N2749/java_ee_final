@@ -47,11 +47,16 @@ public class PostRepositoryHibernate implements PostRepository {
 
     @Override
     public boolean delete(Post post) {
+        transaction = session.beginTransaction();
+        session.delete(post);
+        transaction.commit();
         return false;
     }
 
     @Override
     public void update(Post post) {
-
+        transaction = session.beginTransaction();
+        session.update(post);
+        transaction.commit();
     }
 }
