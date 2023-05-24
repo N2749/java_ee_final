@@ -78,7 +78,7 @@ public class UserService extends HttpServlet {
 
         out.println("<html><body>");
         out.println("<h1>Welcome to the club, Buddy!</h1>");
-        out.println("<a href=\"/login\">Go to login page</a>");
+        out.println("<a href=\"login\">Go to login page</a>");
         out.println("</body></html>");
         out.close();
     }
@@ -126,7 +126,7 @@ public class UserService extends HttpServlet {
         resp.addCookie(idCookie);
         resp.addCookie(isAdminCookie);
         resp.addCookie(isStaffCookie);
-        resp.sendRedirect("/blog_war_exploded/index.jsp");
+        resp.sendRedirect("/blog_war_exploded/");
     }
 
     public static void logOut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -143,7 +143,7 @@ public class UserService extends HttpServlet {
 
         out.println("<html><body>");
         out.println("<h1>Farewell, wanderer</h1>");
-        out.println("<a href=\"/blog_war_exploded/index.jsp\">return to shelter</a>");
+        out.println("<a href=\"/blog_war_exploded/\">return to shelter</a>");
         out.println("</body></html>");
         out.close();
     }
@@ -159,7 +159,7 @@ public class UserService extends HttpServlet {
 
         out.println("<html><body>");
         out.println("<h1>All of us will perish eventually, sooner or later (if necessary, contact the admin, they'll bring you back)</h1>");
-        out.println("<a href=\"/index.jsp\">Go to home page</a>");
+        out.println("<a href=\"/blog_war_exploded\">Go to home page</a>");
         out.println("</body></html>");
         out.close();
     }
