@@ -26,10 +26,13 @@
     <%
         Cookie[] cookies = request.getCookies();
         int userId = -1;
-
+        boolean isAdmin = false;
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("userId")) {
                 userId = Integer.parseInt(cookie.getValue());
+            }
+            if (cookie.getName().equals("isAdmin")) {
+                isAdmin = Boolean.parseBoolean(cookie.getValue());
             }
         }
         if (userId != -1) {
@@ -40,6 +43,11 @@
     } else {
     %>
     <a href="login">login</a>
+    <%
+        }
+    %>
+    <% if (isAdmin) { %>
+    <a href="ausers">users</a>
     <%
         }
     %>

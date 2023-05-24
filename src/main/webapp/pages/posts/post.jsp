@@ -23,12 +23,16 @@
 
     Cookie[] cookies = request.getCookies();
     int userId = -1;
+    boolean isAdmin = false;
     for (Cookie cookie : cookies) {
         if (cookie.getName().equals("userId")) {
             userId = Integer.parseInt(cookie.getValue());
         }
+        if (cookie.getName().equals("isAdmin")) {
+            isAdmin = Boolean.parseBoolean(cookie.getValue());
+        }
     }
-    if (userId != -1 && post.getCreator().getId() == userId) {
+    if (userId != -1 && (post.getCreator().getId() == userId || isAdmin)) {
 %>
 <p>
     <a href="postEdit?post=<%=post.getId()%>">edit</a>
@@ -47,13 +51,13 @@
 <p>created by: <%=post.getCreator().getUsername()%>
 </p>
 <p>Tags:
-<%
-    for (Tag t : post.getTags()) {
-%>
+    <%
+        for (Tag t : post.getTags()) {
+    %>
     <span><%=t.getName()%>, </span>
-<%
-    }
-%>
+    <%
+        }
+    %>
 </p>
 <p><%=post.getText()%>
 </p>

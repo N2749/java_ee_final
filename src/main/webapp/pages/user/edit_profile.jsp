@@ -47,10 +47,14 @@
 
 <%
     int currentUserId = -1;
+    boolean isAdmin = false;
     Cookie[] cookies = request.getCookies();
     for (Cookie cookie : cookies) {
         if (cookie.getName().equals("userId")) {
             currentUserId = Integer.parseInt(cookie.getValue());
+        }
+        if (cookie.getName().equals("isAdmin")) {
+            isAdmin = Boolean.parseBoolean(cookie.getValue());
         }
     }
     int parameterUserId = request.getParameter("userId") == null ? -1 : Integer.parseInt(request.getParameter("userId"));
@@ -58,6 +62,9 @@
     User user = repository.get(parameterUserId == -1 ? currentUserId : parameterUserId);
     if (user == null) {
         request.getRequestDispatcher("/login").forward(request, response);
+    }
+    if (!isAdmin || user.getId() != (parameterUserId == -1 ? currentUserId : parameterUserId)) {
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 %>
 <jsp:include page="../../components/header.jsp"></jsp:include>
@@ -68,7 +75,14 @@
         <label for="username">username</label> <br>
         <input type="text" id="username" name="username" placeholder="cool_dude" required="required"
                value="<%=user.getUsername()%>"> <br>
-
+        <%
+            if (isAdmin) {
+        %>
+        <input type="checkbox" name="isAdmin" <%if (user.isAdmin()){%>checked<%}%>>
+        <input type="checkbox" name="isStaff" <%if (user.isStaff()){%>checked<%}%>>
+        <%
+            }
+        %>
         <label for="login">login</label> <br>
         <input id="login" type="text" name="login" placeholder="cool.dude@awesome.com" required="required"
                value="<%=user.getLogin()%>"> <br>

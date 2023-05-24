@@ -34,11 +34,11 @@
     if (posts.size() > 0)
         for (Post p : posts) {
 %>
-<div>
+<p>
     <a href="post?id=<%=p.getId()%>">
-        <p><%=p.getTitle()%> by <%=p.getCreator().getUsername()%></p>
+        <%=p.getTitle()%> by <%=p.getCreator().getUsername()%>
     </a>
-</div>
+</p>
 <%
     }
 else {

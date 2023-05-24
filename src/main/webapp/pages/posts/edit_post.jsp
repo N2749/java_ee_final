@@ -3,7 +3,11 @@
 <%@ page import="com.blog.blog.repository.implementation.hibernate.PostRepositoryHibernate" %>
 <%@ page import="com.blog.blog.repository.interfaces.TagRepository" %>
 <%@ page import="com.blog.blog.repository.implementation.hibernate.TagRepositoryHibernate" %>
-<%@ page import="com.blog.blog.model.Tag" %><%--
+<%@ page import="com.blog.blog.model.Tag" %>
+<%@ page import="com.blog.blog.repository.implementation.hibernate.UserRepositoryHibernate" %>
+<%@ page import="com.blog.blog.repository.interfaces.UserRepository" %>
+<%@ page import="com.blog.blog.model.User" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: nurba
   Date: 17.05.2023
@@ -23,13 +27,16 @@
 
     Cookie[] cookies = request.getCookies();
     int userId = -1;
+    boolean isAdmin = false;
     for (Cookie cookie : cookies) {
         if (cookie.getName().equals("userId")) {
             userId = Integer.parseInt(cookie.getValue());
         }
+        if (cookie.getName().equals("isAdmin")) {
+            isAdmin = Boolean.parseBoolean(cookie.getValue());
+        }
     }
-    if (userId == -1 || post.getCreator().getId() != userId) {
-        System.out.println("sending error");
+    if (userId == -1 || (post.getCreator().getId() != userId && !isAdmin)) {
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 %>
@@ -39,16 +46,36 @@
     <span>tags
     <%
         TagRepository tagRepository = new TagRepositoryHibernate();
+        List<Tag> parentTags = post.getTags();
+        post.getTags().stream().forEach(System.out::println);
         for (Tag t : tagRepository.getAll()) {
     %>
     <label>
-        <input type="checkbox" name="tags" value="<%=t.getId()%>"><%=t.getName()%>
+        <input type="checkbox" name="tags" value="<%=t.getId()%>" <%if(parentTags.contains(t)){%>checked="checked"<%}%> ><%=t.getName()%>
     </label>
     <%
         }
     %>
     </span>
     <br>
+    <% if (isAdmin) {
+    %>
+    <label for="creator">creator</label>
+    <select name="creator" id="creator">
+        <%
+            UserRepository userRepository = new UserRepositoryHibernate();
+            for (User u : userRepository.getAll()) {
+        %>
+        <option value="<%=u.getId()%>"
+                <%if (u.getId() == post.getCreator().getId()){%>selected<%}%>><%=u.getUsername()%>
+        </option>
+        <%
+            }
+        %>
+    </select><br>
+    <%
+        }
+    %>
     <label for="title">title</label> <br>
     <input type="text" id="title" name="title" placeholder="sunny day" required="required" value="<%=post.getTitle()%>">
     <br>

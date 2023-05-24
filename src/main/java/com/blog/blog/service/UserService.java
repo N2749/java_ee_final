@@ -67,12 +67,20 @@ public class UserService extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         String userId = req.getParameter("userId");
+        String isAdmin = req.getParameter("isAdmin");
+        String isStaff = req.getParameter("isStaff");
         bcryptHashString = BCrypt.withDefaults().hashToString(12, password.toCharArray());
 
         User user = repository.get(Integer.parseInt(userId));
         user.setLogin(login);
         user.setUsername(username);
         user.setPassword(bcryptHashString);
+        if (isAdmin != null) {
+            user.setAdmin(Boolean.parseBoolean(isAdmin));
+        }
+        if (isStaff != null) {
+            user.setStaff(Boolean.parseBoolean(isStaff));
+        }
 
         repository.update(user);
 
@@ -133,6 +141,8 @@ public class UserService extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
+        System.out.println("========================================");
+        System.out.println(user);
         Cookie usernameCookie = new Cookie("username", user.getUsername());
         Cookie idCookie = new Cookie("userId", "" + user.getId());
         Cookie isAdminCookie = new Cookie("isAdmin", "" + user.isAdmin());

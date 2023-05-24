@@ -28,23 +28,32 @@
     TagRepository tagRepository = new TagRepositoryHibernate();
     Tag tag = tagRepository.get(Integer.parseInt(tagId));
 
-    String isStaff = null;
+    boolean isStaff = false;
+    boolean isAdmin = false;
     Cookie[] cookies = request.getCookies();
     for (Cookie cookie : cookies) {
         if (cookie.getName().equals("isStaff")) {
-            isStaff = cookie.getValue();
+            isStaff = Boolean.parseBoolean(cookie.getValue());
+        }
+        if (cookie.getName().equals("isAdmin")) {
+            isAdmin = Boolean.parseBoolean(cookie.getValue());
         }
     }
-    if (isStaff == null || isStaff == "false") {
+    if (!(isStaff || isAdmin)) {
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
+%>
+<%
+    if (isAdmin) {
 %>
 <form action="tagService" method="post">
     <input type="text" hidden="hidden" id="action" name="action" value="deleteTag"/>
     <input type="text" hidden="hidden" id="tagId" name="tagId" value="<%=tag.getId()%>"/>
     <button type="submit" class="submit">delete</button>
 </form>
-
+<%
+    }
+%>
 <form action="tagService" method="post">
     <input type="text" hidden="hidden" id="action2" name="action" value="updateTag"/>
     <input type="text" hidden="hidden" id="tagId2" name="tagId" value="<%=tag.getId()%>"/>
