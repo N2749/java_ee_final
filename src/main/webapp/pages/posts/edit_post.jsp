@@ -25,15 +25,14 @@
             userId = Integer.parseInt(cookie.getValue());
         }
     }
-    if (userId != 1 && post.getCreator().getId() != userId) {
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+    if (userId == -1 || post.getCreator().getId() != userId) {
+        System.out.println("sending error");
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
-    System.out.println(post.getTitle());
-    System.out.println(post.getText());
 %>
-<form action="/postService" method="post">
+<form action="postService" method="post">
     <input type="text" hidden="hidden" id="action" name="action" value="updatePost"/>
-    <input type="text" hidden="hidden" id="postId" name="postId" value=<%=post.getId()%>/>
+    <input type="text" hidden="hidden" id="postId" name="postId" value="<%=post.getId()%>"/>
     <label for="title">title</label> <br>
     <input type="text" id="title" name="title" placeholder="sunny day" required="required" value="<%=post.getTitle()%>">
     <br>

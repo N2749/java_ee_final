@@ -26,7 +26,7 @@
     }
 %>
 <% if (isStaff) { %>
-<button><a href="/pages/posts/add_post.jsp">create new post</a></button>
+<button><a href="add_post.jsp">create new post</a></button>
 <%}%>
 <%
     PostRepository postRepository = new PostRepositoryHibernate();
@@ -35,7 +35,7 @@
         for (Post p : posts) {
 %>
 <div>
-    <a href="/post?id=<%=p.getId()%>">
+    <a href="post?id=<%=p.getId()%>">
         <p><%=p.getTitle()%> by <%=p.getCreator().getUsername()%></p>
     </a>
 </div>

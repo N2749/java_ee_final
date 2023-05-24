@@ -12,7 +12,7 @@
 </head>
 <body>
 <jsp:include page="../../components/header.jsp"></jsp:include>
-<form id="form" action="/postService" method="post">
+<form id="form" action="postService" method="post">
     <input type="text" hidden="hidden" id="action" name="action" value="createPost"/>
     <label for="title">title</label> <br>
     <input type="text" id="title" name="title" placeholder="sunny day" required="required"> <br>

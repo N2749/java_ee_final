@@ -27,7 +27,7 @@
     }
     if (userId != -1 && post.getCreator().getId() == userId) {
 %>
-<a href="/postEdit?post=<%=post.getId()%>">edit</a>
+<a href="postEdit?post=<%=post.getId()%>">edit</a>
 <%
     }
 %>

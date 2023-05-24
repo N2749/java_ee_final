@@ -21,7 +21,7 @@
 <body>
 <nav>
 
-    <a href="/posts">posts</a>
+    <a href="posts">posts</a>
     <%
         Cookie[] cookies = request.getCookies();
         int userId = -1;
@@ -34,8 +34,8 @@
         if (userId != -1) {
     %>
     <%--TODO: profile page--%>
-    <a href="/profile">profile</a>
-    <a href="/logOut">logout</a>
+    <a href="profile">profile</a>
+    <a href="logOut">logout</a>
     <%
     } else {
     %>

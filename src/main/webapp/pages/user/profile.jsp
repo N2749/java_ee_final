@@ -37,7 +37,7 @@
 <% for (Post p :
         user.getPosts()) {
 %>
-<p><a href="/post?id=<%=p.getId()%>"><%=p.getText()%>
+<p><a href="post?id=<%=p.getId()%>"><%=p.getText()%>
 </a></p>
 <%
     }

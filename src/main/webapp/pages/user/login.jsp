@@ -44,7 +44,7 @@
 <body>
 <jsp:include page="../../components/header.jsp"></jsp:include>
 <article>
-    <form id="form" action="/users" method="post">
+    <form id="form" action="users" method="post">
         <input type="text" hidden="hidden" id="action" name="action" value="logIn"/>
         <label for="login">login</label> <br>
         <input id="login" type="text" name="login" placeholder="cool_username334"> <br>
