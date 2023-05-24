@@ -76,10 +76,10 @@ public class UserService extends HttpServlet {
         user.setUsername(username);
         user.setPassword(bcryptHashString);
         if (isAdmin != null) {
-            user.setAdmin(Boolean.parseBoolean(isAdmin));
+            user.setAdmin(isAdmin.equals("on"));
         }
         if (isStaff != null) {
-            user.setStaff(Boolean.parseBoolean(isStaff));
+            user.setStaff(isStaff.equals("on"));
         }
 
         repository.update(user);

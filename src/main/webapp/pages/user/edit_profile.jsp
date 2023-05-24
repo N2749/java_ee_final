@@ -78,8 +78,8 @@
         <%
             if (isAdmin) {
         %>
-        <input type="checkbox" name="isAdmin" <%if (user.isAdmin()){%>checked<%}%>>
-        <input type="checkbox" name="isStaff" <%if (user.isStaff()){%>checked<%}%>>
+        <label for="isAdmin">isAdmin<input type="checkbox" name="isAdmin" id="isAdmin" <%if (user.isAdmin()){%>checked<%}%>></label><br>
+        <label for="isStaff">isStaff<input type="checkbox" name="isStaff" id="isStaff" <%if (user.isStaff()){%>checked<%}%>></label><br>
         <%
             }
         %>
@@ -93,7 +93,7 @@
         <label for="see">show</label>
         <input id="see" type="checkbox" name="see" onclick="showPassword()" id="check"><br>
 
-        <button type="submit" class="submit">register</button>
+        <button type="submit" class="submit">update</button>
     </form>
 </article>
 <script>
