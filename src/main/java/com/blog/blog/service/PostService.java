@@ -80,6 +80,7 @@ public class PostService extends HttpServlet {
 
         List<Tag> tags = new ArrayList<>();
         TagRepository tagRepository = new TagRepositoryHibernate();
+        if (tagsIds!=null &&tagsIds.length>0)
         for (String s : tagsIds) {
             tags.add(tagRepository.get(Integer.parseInt(s)));
         }

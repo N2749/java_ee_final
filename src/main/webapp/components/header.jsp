@@ -10,19 +10,39 @@
 <head>
     <title>Title</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
         nav {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 20px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: #337ab7;
+            text-decoration: none;
+            font-size: 21px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 <nav>
 
-    <a href="posts">posts</a>
-    <a href="tags">tags</a>
+    <a href="posts">Posts</a>
+    <a href="tags">Tags</a>
     <%
         Cookie[] cookies = request.getCookies();
         int userId = -1;
@@ -37,17 +57,17 @@
         }
         if (userId != -1) {
     %>
-    <a href="profile">profile</a>
-    <a href="logOut">logout</a>
+    <a href="profile">Profile</a>
+    <a href="logOut">Logout</a>
     <%
     } else {
     %>
-    <a href="login">login</a>
+    <a href="login">Login</a>
     <%
         }
     %>
     <% if (isAdmin) { %>
-    <a href="ausers">users</a>
+    <a href="ausers">Users</a>
     <%
         }
     %>

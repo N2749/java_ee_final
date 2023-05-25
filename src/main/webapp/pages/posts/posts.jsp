@@ -12,8 +12,46 @@
 <html>
 <head>
     <title>Blog!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #777;
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 2px solid black;
+        }
+
+        button {
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
 </head>
-<body>
+<body class="container">
 <jsp:include page="../../components/header.jsp"></jsp:include>
 <%
     Cookie[] cookies = request.getCookies();
@@ -36,7 +74,7 @@
 %>
 <p>
     <a href="post?id=<%=p.getId()%>">
-        <%=p.getTitle()%> by <%=p.getCreator().getUsername()%>
+        <%=p.getTitle()%> <br>by <%=p.getCreator().getUsername()%>
     </a>
 </p>
 <%
